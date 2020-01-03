@@ -1,0 +1,6 @@
+.vs/
+packages/
+*.suo
+TestResults/
+**/bin/
+**/obj/
