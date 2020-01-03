@@ -14,9 +14,21 @@ namespace NokeLib
         private readonly int year;
         private readonly int week;
         private int weeksOfYear;
-        public DateTime FirstDay { get; set; }
-        public DateTime LastDay { get; set; }
-
+        private DateTime firstDay, lastDay;
+        public DateTime FirstDay
+        {
+            get
+            {
+                return firstDay;
+            }
+        }
+        public DateTime LastDay
+        {
+            get
+            {
+                return lastDay;
+            }
+        }
         private WeekDate() { }
         public WeekDate(int year, int week)
         {
@@ -42,15 +54,15 @@ namespace NokeLib
 
             if (isLastYearLeapAndWed())
             {
-                FirstDay = firstOfThisYear.AddDays(week * 7 - (int)dayOfWeekOfThisYear + 1);
+                firstDay = firstOfThisYear.AddDays(week * 7 - (int)dayOfWeekOfThisYear + 1);
             }
             else
             {
-                FirstDay = firstOfThisYear.AddDays((week - 1) * 7 - (int)dayOfWeekOfThisYear + 1);
+                firstDay = firstOfThisYear.AddDays((week - 1) * 7 - (int)dayOfWeekOfThisYear + 1);
             }
 
             CheckWeekOutRange();
-            LastDay = FirstDay.AddDays(7);
+            lastDay = FirstDay.AddDays(7);
         }
         private void CheckWeekOutRange()
         {
@@ -73,8 +85,8 @@ namespace NokeLib
             var week1 = new WeekDate(yearStart, weekStart);
             var week2 = new WeekDate(yearEnd, weekEnd);
             var weekRange = new WeekDate();
-            weekRange.FirstDay = week1.FirstDay;
-            weekRange.LastDay = week2.LastDay;
+            weekRange.firstDay = week1.FirstDay;
+            weekRange.lastDay = week2.LastDay;
             return weekRange;
         }
     }
